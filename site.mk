@@ -1,13 +1,11 @@
 ##	gluon site.mk makefile example
 
 ##	GLUON_SITE_PACKAGES
-#		specify gluon/openwrt packages to include here
-#		The gluon-mesh-batman-adv-* package must come first because of the dependency resolution
+#		specify Gluon/LEDE packages to include here
 
 GLUON_SITE_PACKAGES := \
-	gluon-mesh-batman-adv-15 \
 	gluon-alfred \
-	gluon-announced \
+	gluon-respondd \
 	gluon-autoupdater \
 	gluon-config-mode-autoupdater \
 	gluon-config-mode-contact-info \
@@ -17,18 +15,17 @@ GLUON_SITE_PACKAGES := \
 	gluon-config-mode-mesh-vpn \
 	gluon-ebtables-filter-multicast \
 	gluon-ebtables-filter-ra-dhcp \
-	gluon-luci-admin \
-	gluon-luci-autoupdater \
-	gluon-luci-portconfig \
-	gluon-luci-wifi-config \
-	gluon-luci-private-wifi \
-	gluon-next-node \
+	gluon-web-admin \
+	gluon-web-autoupdater \
+	gluon-web-network \
+	gluon-web-wifi-config \
+	gluon-web-private-wifi \
+	gluon-mesh-batman-adv-15 \
 	gluon-mesh-vpn-fastd \
 	gluon-radvd \
 	gluon-setup-mode \
 	gluon-status-page \
 	haveged \
-	iptables \
 	iwinfo
 
 ##	DEFAULT_GLUON_RELEASE
@@ -39,6 +36,7 @@ GLUON_SITE_PACKAGES := \
 
 DEFAULT_GLUON_RELEASE := 0.6+exp$(shell date '+%Y%m%d')
 
+# Variables set with ?= can be overwritten from the command line
 
 ##	GLUON_RELEASE
 #		call make with custom GLUON_RELEASE flag, to use your own release version scheme.
@@ -47,14 +45,13 @@ DEFAULT_GLUON_RELEASE := 0.6+exp$(shell date '+%Y%m%d')
 #		would generate images named like this:
 #			gluon-ff%site_code%-23.42+5-%router_model%.bin
 
-# Allow overriding the release number from the command line, same as gluon branch.
 GLUON_RELEASE ?= 1.1.1
 GLUON_BRANCH ?= testing
 
 # Default priority for updates.
 GLUON_PRIORITY ?= 0
 
-# Default region.
+# Region code required for some images; supported values: us eu
 GLUON_REGION ?= eu
 
 # Languages to include
